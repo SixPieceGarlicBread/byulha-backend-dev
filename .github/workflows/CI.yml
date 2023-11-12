@@ -27,14 +27,19 @@ jobs:
         distribution: 'temurin'
 
     - name: Setup MySQL
-      uses: mirromutth/mysql-action@v1.1
+      uses: samin/mysql-action@v1
       with:
+        character set server: 'utf8'
         host port: 3306
         container port: 3306
         mysql database: 'byulha'
         mysql user: 'gutanbug'
         mysql root password: ${{ secrets.DB_PASSWORD }}
         
+    - name: Start Redis
+      uses: supercharge/redis-github-action@1.1.0
+      with:
+        redis-version: 6
     - name: Make test properties
       env:
         PROPERTIES: $${{ secrets.PROPERTIES_TEST }}
