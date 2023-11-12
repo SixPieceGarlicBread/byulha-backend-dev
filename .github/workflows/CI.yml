@@ -9,7 +9,7 @@ name: CI
 
 on:
   pull_request:
-    branches: [ "main" , "dev" ]
+    branches: [ "main" ]
 
 permissions:
   contents: read
@@ -40,13 +40,14 @@ jobs:
       uses: supercharge/redis-github-action@1.1.0
       with:
         redis-version: 6
+        
     - name: Make test properties
       env:
-        PROPERTIES: $${{ secrets.PROPERTIES_TEST }}
+        PROPERTIES: ${{ secrets.PROPERTIES_TEST }}
       run: |
         mkdir -p ./src/test/resources && cd "$_"
         touch ./application.yml
-        echo $PROPERTIES > application.yml
+        echo $PROPERTIES | base64 --decode > application.yml
       shell: bash
     
     - name: Build with Gradle
