@@ -39,7 +39,7 @@ jobs:
       env:
         PROPERTIES: $${{ secrets.PROPERTIES_TEST }}
       run: |
-        cd ./src/test/resources
+        mkdir -p ./src/test/resources && cd "$_"
         touch ./application.yml
         echo $PROPERTIES | base64 --decode > application.yml
       shell: bash
