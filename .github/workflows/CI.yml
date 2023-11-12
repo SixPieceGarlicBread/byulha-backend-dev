@@ -41,7 +41,7 @@ jobs:
       run: |
         mkdir -p ./src/test/resources && cd "$_"
         touch ./application.yml
-        echo $PROPERTIES | base64 --decode > application.yml
+        echo $PROPERTIES > application.yml
       shell: bash
     
     - name: Build with Gradle
